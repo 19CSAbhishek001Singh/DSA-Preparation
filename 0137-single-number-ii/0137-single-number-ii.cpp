@@ -3,18 +3,35 @@ class Solution
     public:
         int singleNumber(vector<int> &nums)
         {
-            map<int, int> mp;
-            for (auto x: nums)
+            int ans = 0;
+            for (int i = 0; i < 32; i++)
             {
-                mp[x]++;
-            }
-            for (auto x: mp)
-            {
-                if (x.second == 1)
+                int cnt = 0;
+                for (auto x: nums)
                 {
-                    return x.first;
+                    if (x &(1 << i))
+                    {
+                        cnt++;
+                    }
+                }
+                if (cnt % 3)
+                {
+                    ans |= (1 << i);
                 }
             }
-            return -1;
+            return ans;
+           	// map<int, int> mp;
+           	// for (auto x: nums)
+           	// {
+           	//     mp[x]++;
+           	// }
+           	// for (auto x: mp)
+           	// {
+           	//     if (x.second == 1)
+           	//     {
+           	//         return x.first;
+           	//     }
+           	// }
+           	// return -1;
         }
 };
